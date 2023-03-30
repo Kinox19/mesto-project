@@ -1,0 +1,7 @@
+.header{
+    display: flex;
+    border-bottom: 1px solid #fff;
+    align-items: start;
+    min-height: 74px;
+    margin: 45px 200px 40px 200px;
+}

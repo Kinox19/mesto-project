@@ -1,0 +1,9 @@
+.profile__avatar{
+    max-width: 120px;
+    border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    -ms-border-radius: 200px;
+    -o-border-radius: 200px;
+    margin-right: 30px;
+}
