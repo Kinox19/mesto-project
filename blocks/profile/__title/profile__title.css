@@ -6,3 +6,10 @@
     color: rgba(255, 255, 255, 1);
     margin-right: 18px;
 }
+
+
+@media screen and (max-width: 320px) {
+    .profile__title{
+        font-size: 27px;
+    }
+}
