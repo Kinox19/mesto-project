@@ -16,18 +16,74 @@
         </header>
 
         <section class="profile">
-            <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Аватар профиля">
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button class="edit-btn">
-                    <img class="edit-btn__vector" src="./images/edit.svg">
-                </button>
-                <p class="profile__description">Исследователь океана</p>
+                <img class="profile__avatar" src="./images/profile-avatar.jpg">
+                <div class="profile__text-information">
+                    <div class="profile__name">
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
+                        <button type="button" class="button button_edit"></button>
+                    </div>
+                    <p class="profile__description">Исследователь океана</p>
+                </div>
             </div>
-            <button class="add-btn">
-                <img class="add-btn__vector" src="./images/add.svg">
-            </button>
+            <button type="button" class="button button_add"></button>
         </section>
+
+        <section class="cards-grid">
+
+            <div class="card">
+                <img class="card__image" src="./images/cards-grid-kamchatka.jpg" alt="Фотография Камчатки">
+                <div class="card__info">
+                    <h2 class="card__title">Камчатка</h2>
+                    <button type="button" class="button button_like"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card__image" src="./images/cards-grid-atharva-tulsi.jpg" alt="Фотография Атхарва Тулси">
+                <div class="card__info">
+                    <h2 class="card__title">Атхарва Тулси</h2>
+                    <button type="button" class="button button_like"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card__image" src="./images/cards-grid-baikal-2.jpg" alt="Фотография Байкала">
+                <div class="card__info">
+                    <h2 class="card__title">Байкал</h2>
+                    <button type="button" class="button button_like"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card__image" src="./images/cards-grid-baikal.jpg" alt="Фотография Байкала">
+                <div class="card__info">
+                    <h2 class="card__title">Еще Байкал</h2>
+                    <button type="button" class="button button_like"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card__image" src="./images/cards-grid-dombay.jpg" alt="Фотография Домбай">
+                <div class="card__info">
+                    <h2 class="card__title">Домбай</h2>
+                    <button type="button" class="button button_like"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card__image" src="./images/cards-grid-karachaevsk.jpg" alt="Фотография Карачаево-Черкесии">
+                <div class="card__info">
+                    <h2 class="card__title">Карачаево-Черкесия</h2>
+                    <button type="button" class="button button_like"></button>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            <p class="footer__copyright">&#169;2020 Mesto Russia</p>
+        </footer>
 
     </div>
 </body>

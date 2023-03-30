@@ -8,12 +8,23 @@
 @import url(../blocks/header/header.css);
 
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
-@import url(../blocks/profile/__description/profile__description.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__text-information/profile__text-information.css);
 @import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__description/profile__description.css);
 
-@import url(../blocks/edit-btn/edit-btn.css);
+@import url(../blocks/button/button.css);
+@import url(../blocks/button/_add/button_add.css);
+@import url(../blocks/button/_edit/button_edit.css);
+@import url(../blocks/button/_like/button_like.css);
 
-@import url(../blocks/add-btn/add-btn.css);
-@import url(../blocks/add-btn/__vector/add-btn__vector.css);
+@import url(../blocks/cards-grid/cards-grid.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__info/card__info.css);
+@import url(../blocks/card/__title/card__title.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

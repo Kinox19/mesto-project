@@ -1,0 +1,8 @@
+.button_like{
+    background-image: url(../../../images/btn-like.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 19px;
+    min-width: 22px;
+    border: none;
+}
