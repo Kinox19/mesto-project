@@ -27,3 +27,11 @@
     cursor: pointer;
     opacity: 0.8;
 }
+
+@media screen and (max-width: 680px) {
+    .popup__button{
+        min-height: 46px;
+        min-width: 238px;
+        font-size: 14px;
+    }
+}

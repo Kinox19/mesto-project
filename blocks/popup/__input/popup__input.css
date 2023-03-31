@@ -10,3 +10,9 @@
     line-height: 1.21;
     text-align: left;
 }
+
+@media screen and (max-width: 680px) {
+    .popup__input{
+        min-width: 238px;
+    }
+}

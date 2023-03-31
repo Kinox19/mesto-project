@@ -4,7 +4,7 @@
     align-items: start;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 680px) {
     .profile__text-information{
         align-items: center;
         margin-top: 26px;

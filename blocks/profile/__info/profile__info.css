@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 680px) {
     .profile__info{
         flex-direction: column;
     }
