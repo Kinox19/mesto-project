@@ -19,7 +19,5 @@
 @media screen and (max-width: 680px) {
     .cards-grid{
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 19px 48px 19px;
     }
 }

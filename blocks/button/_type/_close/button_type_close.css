@@ -1,5 +1,5 @@
-.button_close{
-    background-image: url(../../../images/btn-close.svg);
+.button_type_close{
+    background-image: url(../../../../images/btn-close.svg);
     background-repeat: no-repeat;
     background-position: center;
     min-height: 32px;
@@ -10,18 +10,22 @@
     -moz-transition: 0.3s;
     -ms-transition: 0.3s;
     -o-transition: 0.3s;
-    align-self: flex-end;
     margin-bottom: 8px;
     margin-left: 8px;
+    position: absolute;
+    top: 0;
+    right: -40px;
 }
 
-.button_close:hover{
+.button_type_close:hover{
     cursor: pointer;
     opacity: .6;
 }
 
 @media screen and (max-width: 680px) {
-    .button_close{
+    .button_type_close{
+        position: static;
+        align-self: flex-end;
         margin-bottom: 16px;
         margin-left: 0;
         min-height: 20px;

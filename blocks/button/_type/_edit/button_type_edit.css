@@ -1,5 +1,5 @@
-.button_edit{
-    background-image: url(../../../images/btn-edit.svg);
+.button_type_edit{
+    background-image: url(../../../../images/btn-edit.svg);
     background-repeat: no-repeat;
     background-position: center;
     min-height: 24px;
@@ -12,13 +12,13 @@
     -o-transition: 0.3s;
 }
 
-.button_edit:hover{
+.button_type_edit:hover{
     cursor: pointer;
     opacity: .6;
 }
 
 @media screen and (max-width: 680px) {
-    .button_edit{
+    .button_type_edit{
         min-height: 18px;
         min-width: 18px;
     }
