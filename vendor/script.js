@@ -26,7 +26,15 @@ const initialCards = [
     ];
 
 const cardsGrid = document.querySelector('.cards-grid');
-const userProfilePopUp = document.querySelector('.popup');
+
+const closePopUpButton = document.querySelector('.button_type_close');
+const userProfileEdit = document.querySelector('.button_type_edit');
+const userProfilePopUp = document.querySelector('#popup-user');
+const nameInput = document.querySelector('#user-name');
+const userTitle = document.querySelector('.profile__title')
+const descriptionInput = document.querySelector('#user-description');
+const userDescription = document.querySelector('.profile__description')
+
 
 function showInitialCards(titleText, imageLink){
     const cardTemplate = document.querySelector('#card').content;
@@ -54,3 +62,29 @@ function renderCards(card) {
   }
 
 initialCards.map(renderCards);
+
+
+function closePopUp(popUp){
+    popUp.classList.remove('popup_opened');
+}
+
+function openPopUp(popUp){
+    popUp.classList.add('popup_opened');
+}
+
+userProfileEdit.addEventListener('click', () =>{
+    openPopUp(userProfilePopUp);
+    nameInput.value = userTitle.textContent;
+    descriptionInput = userDescription.textContent;
+})
+
+closePopUpButton.addEventListener('click', () =>{
+    closePopUp(userProfilePopUp);
+})
+
+userProfilePopUp.addEventListener('submit', (e) => {
+    e.preventDefault();
+    userTitle.innerHTML =  nameInput.value;
+    userDescription.innerHTML = descriptionInput.value;
+    closePopUp(userProfilePopUp);
+});
