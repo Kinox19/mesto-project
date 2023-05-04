@@ -20,7 +20,7 @@
                 <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Аватар профиля">
                 <div class="profile__text-information">
                     <div class="profile__name">
-                        <h1 class="profile__title">Жак-Ив Кусто и кто-то там</h1>
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <button type="button" class="button button_type_edit"></button>
                     </div>
                     <p class="profile__description">Исследователь океана</p>
@@ -31,53 +31,15 @@
 
         <section class="cards-grid">
 
-            <div class="card">
-                <img class="card__image" src="./images/cards-grid-arisa.jpg" alt="Фотография Камчатки">
-                <div class="card__info">
-                    <h2 class="card__title">Камчатка</h2>
-                    <button type="button" class="button button_type_like"></button>
+            <template id="card">
+                <div class="card">
+                    <img class="card__image">
+                    <div class="card__info">
+                        <h2 class="card__title"></h2>
+                        <button type="button" class="button button_type_like"></button>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/cards-grid-arisa.jpg" alt="Фотография Атхарва Тулси">
-                <div class="card__info">
-                    <h2 class="card__title">Атхарва Тулси</h2>
-                    <button type="button" class="button button_type_like"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/cards-grid-dombay.jpg" alt="Фотография Байкала">
-                <div class="card__info">
-                    <h2 class="card__title">Байкал</h2>
-                    <button type="button" class="button button_type_like"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/cards-grid-karachaevsk.jpg" alt="Фотография Байкала">
-                <div class="card__info">
-                    <h2 class="card__title">Еще старое здание</h2>
-                    <button type="button" class="button button_type_like"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/cards-grid-dombay.jpg" alt="Фотография Домбай">
-                <div class="card__info">
-                    <h2 class="card__title">Домбай</h2>
-                    <button type="button" class="button button_type_like"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/cards-grid-karachaevsk.jpg" alt="Фотография Карачаево-Черкесии">
-                <div class="card__info">
-                    <h2 class="card__title">Карачаево-Черкесия</h2>
-                    <button type="button" class="button button_type_like"></button>
-                </div>
-            </div>
+            </template>
 
         </section>
 
