@@ -33,6 +33,11 @@ function showInitialCards(titleText, imageLink){
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     cardElement.querySelector('.card__title').textContent = titleText;
     cardElement.querySelector('.card__image').src = imageLink;
+
+    cardElement.querySelector('.button_type_like').addEventListener('click', function (e) {
+        e.target.classList.toggle('button_type_like_active');
+      });
+
     cardsGrid.append(cardElement);
 }
 
