@@ -34,6 +34,7 @@ const addCardButton = document.querySelector('.button_type_add');
 
 const userProfilePopUp = document.querySelector('#popup-user');
 const addCardPopUp = document.querySelector('#popup-place');
+const imagePopUp = document.querySelector('#popup-image');
 
 const nameInput = document.querySelector('#user-name');
 const userTitle = document.querySelector('.profile__title')
@@ -42,6 +43,9 @@ const userDescription = document.querySelector('.profile__description');
 
 const placeNameInput = document.querySelector('#place-name');
 const placeLinkInput = document.querySelector('#place-link');
+
+const imagePopUpCaption = document.querySelector('.popup__caption');
+const imageInPopUp = document.querySelector('.popup__image');
 
 
 function openPopUp(popUp){
@@ -65,6 +69,7 @@ function showInitialCards(titleText, imageLink){
     cardElement.querySelector('.card__title').textContent = titleText;
     cardElement.querySelector('.card__image').src = imageLink;
 
+    cardElement.querySelector('.card__image').addEventListener('click', openImageAsPopUp);
     // лайкаем карточку
     cardElement.querySelector('.button_type_like').addEventListener('click', function (e) {
         e.target.classList.toggle('button_type_like_active');
@@ -74,6 +79,8 @@ function showInitialCards(titleText, imageLink){
     cardElement.querySelector('.button_type_delete').addEventListener('click', function (e) {
         e.target.closest('.card').remove();
     });
+
+
 
     cardsGrid.append(cardElement);
 }
@@ -128,4 +135,13 @@ function addNewCard () {
     newCard.querySelector('.card__title').textContent = placeNameInput.value;
 
     return newCard
+}
+
+function openImageAsPopUp(e){
+    const imageCaption = e.target.closest('.card').querySelector('.card__title');
+    imagePopUpCaption.textContent = imageCaption.textContent;
+    console.log(imagePopUpCaption.textContent);
+    imageInPopUp.src = e.target.closest('.card').querySelector('.card__image').src;
+    imageInPopUp.alt = imagePopUpCaption.textContent;
+    openPopUp(imagePopUp);
 }
