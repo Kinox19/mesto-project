@@ -34,9 +34,15 @@ function showInitialCards(titleText, imageLink){
     cardElement.querySelector('.card__title').textContent = titleText;
     cardElement.querySelector('.card__image').src = imageLink;
 
+    // лайкаем карточку
     cardElement.querySelector('.button_type_like').addEventListener('click', function (e) {
         e.target.classList.toggle('button_type_like_active');
       });
+
+    // удаляем карточку
+    cardElement.querySelector('.button_type_delete').addEventListener('click', function (e) {
+        e.target.closest('.card').remove();
+    });
 
     cardsGrid.append(cardElement);
 }
@@ -48,6 +54,3 @@ function renderCards(card) {
   }
 
 initialCards.map(renderCards);
-
-
-
