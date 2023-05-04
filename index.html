@@ -47,13 +47,27 @@
         <div id="popup-user" class="popup">
             <div class="popup__content">
                 <button type="button" class="button button_type_close"></button>
-                <form name="popup-form" class="popup__container">
+                <form id="user" name="popup-form" class="popup__container">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <div class="popup__inputs">
                         <input id="user-name" name="input-profile-title" type="text" class="popup__input" value="Жак-Ив Кусто">
                         <input id="user-description" name="input-profile-description" type="text" class="popup__input" value="Исследователь океана">
                     </div>
                     <button type="submit" class="popup__button">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="popup-place" class="popup">
+            <div class="popup__content">
+                <button type="button" class="button button_type_close"></button>
+                <form id="user" name="popup-form" class="popup__container">
+                    <h2 class="popup__title">Новое место</h2>
+                    <div class="popup__inputs">
+                        <input id="place-name" name="input-profile-title" type="text" class="popup__input" value="" placeholder="Название">
+                        <input id="place-link" name="input-profile-description" type="text" class="popup__input" value="" placeholder="Ссылка на картинку">
+                    </div>
+                    <button type="submit" class="popup__button">Создать</button>
                 </form>
             </div>
         </div>
