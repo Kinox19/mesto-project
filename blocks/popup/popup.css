@@ -1,11 +1,18 @@
-.popup{
-    min-width:100%;
-    min-height:100%;
-    background-color: rgba(0,0,0,0.5);
-    position:fixed;
-    top:0;
+.popup {
+    position: fixed;
+    top: 0;
     left: 0;
-    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    -webkit-transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    -moz-transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    -ms-transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    -o-transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
