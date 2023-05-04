@@ -68,6 +68,9 @@ function showInitialCards(titleText, imageLink){
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     cardElement.querySelector('.card__title').textContent = titleText;
     cardElement.querySelector('.card__image').src = imageLink;
+    cardElement.querySelector('.card__image').alt = titleText;
+
+
 
     cardElement.querySelector('.card__image').addEventListener('click', openImageAsPopUp);
     // лайкаем карточку
@@ -96,7 +99,7 @@ initialCards.map(renderCards);
 userProfileEdit.addEventListener('click', () =>{
     openPopUp(userProfilePopUp);
     nameInput.value = userTitle.textContent;
-    descriptionInput = userDescription.textContent;
+    descriptionInput.value = userDescription.textContent;
 })
 
 userProfilePopUp.addEventListener('submit', (e) => {
@@ -140,7 +143,6 @@ function addNewCard () {
 function openImageAsPopUp(e){
     const imageCaption = e.target.closest('.card').querySelector('.card__title');
     imagePopUpCaption.textContent = imageCaption.textContent;
-    console.log(imagePopUpCaption.textContent);
     imageInPopUp.src = e.target.closest('.card').querySelector('.card__image').src;
     imageInPopUp.alt = imagePopUpCaption.textContent;
     openPopUp(imagePopUp);
