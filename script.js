@@ -7,6 +7,7 @@ const addCardButton = document.querySelector('.button_type_add');
 
 const userProfilePopUp = document.querySelector('#popup-user');
 const userProfileForm = document.querySelector('#user');
+const newPlaceForm = document.querySelector('#newPlace')
 const addCardPopUp = document.querySelector('#popup-place');
 const imagePopUp = document.querySelector('#popup-image');
 
@@ -47,11 +48,10 @@ function createCard(cardData) {
     cardImage.alt = cardData.name;
 
     //попап картинка
-    cardImage.addEventListener('click', (e) => {
-      const imageCaption = e.target.closest('.card').querySelector('.card__title');
-      imagePopUpCaption.textContent = imageCaption.textContent;
-      imageInPopUp.src = e.target.closest('.card').querySelector('.card__image').src;
-      imageInPopUp.alt = imagePopUpCaption.textContent;
+    cardImage.addEventListener('click', () => {
+      imageInPopUp.src = cardData.link;
+      imageInPopUp.alt = cardData.name;
+      imagePopUpCaption.textContent = cardData.name;
       openPopUp(imagePopUp);
     });
 
@@ -76,15 +76,10 @@ function createCard(cardData) {
   function addNewCard() {
     const cardObj = {name: placeNameInput.value, link:placeLinkInput.value};
     const card = createCard(cardObj);
-    const cardImage = card.querySelector('.card__image');
-    cardImage.src = cardObj.link;
-    cardImage.alt = cardObj.name;
-    card.querySelector('.card__title').textContent = cardObj.name;
-
     return card;
 };
 
-addCardPopUp.addEventListener('submit', (e) => {
+newPlaceForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const card = addNewCard();
     cardsGrid.prepend(card);
