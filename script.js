@@ -1,38 +1,40 @@
 const initialCards = [
-        {
-            name: 'Архыз',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-        },
-        {
-            name: 'Челябинская область',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-        },
-        {
-            name: 'Иваново',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-        },
-        {
-            name: 'Камчатка',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-        },
-        {
-            name: 'Холмогорский район',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-        },
-        {
-            name: 'Байкал',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-        }
-    ];
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
 
 const cardsGrid = document.querySelector('.cards-grid');
+const cardTemplate = document.querySelector('#card').content;
 
 const closePopUpButtons = document.querySelectorAll('.button_type_close');
 const userProfileEdit = document.querySelector('.button_type_edit');
 const addCardButton = document.querySelector('.button_type_add');
 
-
 const userProfilePopUp = document.querySelector('#popup-user');
+const userProfileForm = document.querySelector('#user');
 const addCardPopUp = document.querySelector('#popup-place');
 const imagePopUp = document.querySelector('#popup-image');
 
@@ -48,6 +50,7 @@ const imagePopUpCaption = document.querySelector('.popup__caption');
 const imageInPopUp = document.querySelector('.popup__image');
 
 
+
 function openPopUp(popUp){
     popUp.classList.add('popup_opened');
 }
@@ -57,14 +60,13 @@ function closePopUp(closestPopUp){
 }
 
 closePopUpButtons.forEach(button => {
+    const closestPopUp = button.closest('.popup');
     button.addEventListener('click', () => {
-        const closestPopUp = button.closest('.popup');
         closePopUp(closestPopUp);
     });
 });
 
 function showInitialCards(titleText, imageLink){
-    const cardTemplate = document.querySelector('#card').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     cardElement.querySelector('.card__title').textContent = titleText;
     cardElement.querySelector('.card__image').src = imageLink;
@@ -102,7 +104,7 @@ userProfileEdit.addEventListener('click', () =>{
     descriptionInput.value = userDescription.textContent;
 })
 
-userProfilePopUp.addEventListener('submit', (e) => {
+userProfileForm.addEventListener('submit', (e) => {
     e.preventDefault();
     userTitle.textContent =  nameInput.value;
     userDescription.textContent = descriptionInput.value;
@@ -134,7 +136,9 @@ function addNewCard () {
     newCard.querySelector('.button_type_delete').addEventListener('click', function (e) {
         e.target.closest('.card').remove();
     });
+    newCard.querySelector('.card__image').addEventListener('click', openImageAsPopUp);
     newCard.querySelector('.card__image').src = placeLinkInput.value;
+    newCard.querySelector('.card__image').alt = placeNameInput.value;
     newCard.querySelector('.card__title').textContent = placeNameInput.value;
 
     return newCard
