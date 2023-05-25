@@ -51,9 +51,9 @@
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <div class="popup__inputs">
                         <input id="user-name" name="input-profile-title" type="text" minlength="2" maxlength="40" required class="popup__input" value="Жак-Ив Кусто">
-                        <span></span>
+                        <span class="popup__input-error user-name-error" id="name-input-error"></span>
                         <input id="user-description" name="input-profile-description" type="text" minlength="2" maxlength="200" required class="popup__input" value="Исследователь океана">
-                        <span></span>
+                        <span class="popup__input-error user-description-error" id="description-input-error"></span>
                     </div>
                     <button type="submit" class="popup__button">Сохранить</button>
                 </form>
@@ -63,13 +63,13 @@
         <div id="popup-place" class="popup">
             <div class="popup__content">
                 <button type="button" class="button button_type_close"></button>
-                <form id="newPlace" name="popup-form" class="popup__container">
+                <form id="newPlace" name="popup-form" class="popup__container" novalidate>
                     <h2 class="popup__title">Новое место</h2>
                     <div class="popup__inputs">
-                        <input id="place-name" name="input-profile-title" type="text" class="popup__input" value="" placeholder="Название">
-                        <span></span>
-                        <input id="place-link" name="input-profile-description" type="url" class="popup__input" value="" placeholder="Ссылка на картинку">
-                        <span></span>
+                        <input id="place-name" name="input-profile-title" type="text" class="popup__input" value="" placeholder="Название" minlength="2" maxlength="30" required>
+                        <span class="popup__input-error place-name-error"></span>
+                        <input id="place-link" name="input-profile-description" type="url" class="popup__input" value="" placeholder="Ссылка на картинку" required>
+                        <span class="popup__input-error place-link-error"></span>
                     </div>
                     <button type="submit" class="popup__button">Создать</button>
                 </form>

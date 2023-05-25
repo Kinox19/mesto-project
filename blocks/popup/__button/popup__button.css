@@ -21,6 +21,7 @@
     -o-border-radius: 2px;
     margin: 0 auto;
     margin-bottom: 37px;
+    margin-top: 18px;
 }
 
 .popup__button:hover{
@@ -34,5 +35,6 @@
         min-width: 238px;
         font-size: 14px;
         margin-bottom: 25px;
+        margin-top: 15px;
     }
 }

@@ -25,7 +25,6 @@ const imageInPopUp = document.querySelector('.popup__image');
 
 
 
-
 function openPopUp(popUp){
     popUp.classList.add('popup_opened');
     popUp.addEventListener('click', (e) => {
@@ -42,12 +41,12 @@ function openPopUp(popUp){
 
 function closePopUp(closestPopUp){
     closestPopUp.classList.remove('popup_opened');
-    popUp.removeEventListener('click', (e) => {
+    closestPopUp.removeEventListener('click', (e) => {
       if(e.target.classList.contains('popup')){
         closePopUp(popUp);
       }
     });
-    popUp.removeEventListener('keydown', (e) => {
+    closestPopUp.removeEventListener('keydown', (e) => {
       if(e.key === 'Escape'){
         closePopUp(popUp);
       }
@@ -132,6 +131,70 @@ addCardButton.addEventListener('click', () =>{
     openPopUp(addCardPopUp);
 });
 
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_type_error');
+  errorElement.classList.remove('popup__input-error_active');
+  errorElement.textContent = '';
+};
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
 
 
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__button')
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement);
+    });
+  });
+};
+
+
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll('.popup__container'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
+    setEventListeners(formElement);
+  });
+}
+
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+function toggleButtonState(inputList, buttonElement){
+  console.log('Сработал тоггл на кнопки')
+  if( hasInvalidInput(inputList) ){
+    buttonElement.classList.add('popup__button_inactive');
+    buttonElement.setAttribute('disabled', '')
+  } else {
+    buttonElement.classList.remove('popup__button_inactive');
+    buttonElement.removeAttribute('disabled')
+  }
+}
+
+enableValidation();
 
