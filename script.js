@@ -5,6 +5,7 @@ const closePopUpButtons = document.querySelectorAll('.button_type_close');
 const userProfileEdit = document.querySelector('.button_type_edit');
 const addCardButton = document.querySelector('.button_type_add');
 
+const allPopUps = document.querySelectorAll('.popup')
 const userProfilePopUp = document.querySelector('#popup-user');
 const userProfileForm = document.querySelector('#user');
 const newPlaceForm = document.querySelector('#newPlace')
@@ -27,11 +28,36 @@ const imageInPopUp = document.querySelector('.popup__image');
 
 function openPopUp(popUp){
     popUp.classList.add('popup_opened');
+    popUp.addEventListener('click', (e) => {
+      if(e.target.classList.contains('popup')){
+        closePopUp(popUp);
+      }
+    });
+    popUp.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){
+        closePopUp(popUp);
+      }
+    });
 }
 
 function closePopUp(closestPopUp){
     closestPopUp.classList.remove('popup_opened');
+    popUp.removeEventListener('click', (e) => {
+      if(e.target.classList.contains('popup')){
+        closePopUp(popUp);
+      }
+    });
+    popUp.removeEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){
+        closePopUp(popUp);
+      }
+    });
 }
+
+//сейчас без табиндекса не закрывается попап по Esc
+allPopUps.forEach(popUp => {
+  popUp.setAttribute('tabindex', '0');
+})
 
 closePopUpButtons.forEach(button => {
     const closestPopUp = button.closest('.popup');
