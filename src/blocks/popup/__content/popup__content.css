@@ -4,7 +4,7 @@
     min-width: 430px;
     position: relative;
     min-height: 370px;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 @media screen and (max-width: 680px) {

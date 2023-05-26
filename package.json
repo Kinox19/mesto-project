@@ -2,9 +2,10 @@
   "name": "mesto-project",
   "version": "1.0.0",
   "description": "* Реализация сайта \"Место\" для дальнейшей разработки взаимодейтсвия с помощью JavaScript\r * Проект был реализован по дизайну из Figma.\r * Сайт реализован с помощью Flex и Grid технологий верстки.",
-  "main": "script.js",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,21 @@
   },
   "homepage": "https://github.com/Kinox19/mesto-project#readme",
   "devDependencies": {
-    "webpack": "^5.84.1",
-    "webpack-cli": "^5.1.1"
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.4",
+    "cssnano": "^6.0.1",
+    "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss-loader": "^7.3.1",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "core-js": "^3.30.2"
   }
 }
