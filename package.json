@@ -1,0 +1,23 @@
+{
+  "name": "mesto-project",
+  "version": "1.0.0",
+  "description": "* Реализация сайта \"Место\" для дальнейшей разработки взаимодейтсвия с помощью JavaScript\r * Проект был реализован по дизайну из Figma.\r * Сайт реализован с помощью Flex и Grid технологий верстки.",
+  "main": "script.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kinox19/mesto-project.git"
+  },
+  "author": "Artem Puchkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kinox19/mesto-project/issues"
+  },
+  "homepage": "https://github.com/Kinox19/mesto-project#readme",
+  "devDependencies": {
+    "webpack": "^5.84.1",
+    "webpack-cli": "^5.1.1"
+  }
+}
