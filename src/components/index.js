@@ -14,7 +14,7 @@ import {
   placeNameInput,
   placeLinkInput
 } from './common'
-import  {enableValidation, setEventListeners}  from "./validate";
+import  {enableValidation}  from "./validate";
 import { addNewCard } from './card';
 import { openPopUp, closePopUp } from './modal';
 
