@@ -22,3 +22,12 @@ export const placeLinkInput = document.querySelector('#place-link');
 
 export const imagePopUpCaption = document.querySelector('.popup__caption');
 export const imageInPopUp = document.querySelector('.popup__image');
+
+export const validationSettings = {
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active',
+}

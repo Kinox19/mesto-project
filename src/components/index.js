@@ -12,9 +12,10 @@ import {
   descriptionInput,
   userDescription,
   placeNameInput,
-  placeLinkInput
+  placeLinkInput,
+  validationSettings
 } from './common'
-import  {enableValidation}  from "./validate";
+import  {enableValidation, toggleButtonState}  from "./validate";
 import { addNewCard } from './card';
 import { openPopUp, closePopUp } from './modal';
 
@@ -26,6 +27,9 @@ newPlaceForm.addEventListener('submit', (e) => {
     closePopUp(addCardPopUp);
     placeNameInput.value = '';
     placeLinkInput.value = '';
+    const inputList = Array.from(newPlaceForm.querySelectorAll('.popup__input'));
+    const buttonElement = newPlaceForm.querySelector('.popup__button');
+    toggleButtonState(inputList, buttonElement, { inactiveButtonClass: 'popup__button_inactive' });
   });
 
 userProfileEdit.addEventListener('click', () =>{
@@ -45,11 +49,4 @@ addCardButton.addEventListener('click', () =>{
     openPopUp(addCardPopUp);
 });
 
-enableValidation({
-  formSelector: '.popup__container',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-});
+enableValidation(validationSettings);
