@@ -3,7 +3,9 @@ import {
   cardsGrid,
   userProfileEdit,
   addCardButton,
+  userAvatarEdit,
   userProfilePopUp,
+  avatarPopUp,
   userProfileForm,
   newPlaceForm,
   addCardPopUp,
@@ -11,13 +13,18 @@ import {
   userTitle,
   descriptionInput,
   userDescription,
+  userAvatar,
   placeNameInput,
   placeLinkInput,
-  validationSettings
+  validationSettings,
+  avatarForm,
+  avatarLinkInput
 } from './common'
 import  {enableValidation, toggleButtonState}  from "./validate";
 import { addNewCard } from './card';
 import { openPopUp, closePopUp } from './modal';
+
+import {fetchInitialProfile, editProfile, editAvatar} from './api'
 
 
 newPlaceForm.addEventListener('submit', (e) => {
@@ -32,21 +39,75 @@ newPlaceForm.addEventListener('submit', (e) => {
     toggleButtonState(inputList, buttonElement, { inactiveButtonClass: 'popup__button_inactive' });
   });
 
-userProfileEdit.addEventListener('click', () =>{
+  userProfileEdit.addEventListener('click', () =>{
     openPopUp(userProfilePopUp);
     nameInput.value = userTitle.textContent;
     descriptionInput.value = userDescription.textContent;
-});
+  });
 
-userProfileForm.addEventListener('submit', (e) => {
+  userProfileForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    userTitle.textContent =  nameInput.value;
-    userDescription.textContent = descriptionInput.value;
-    closePopUp(userProfilePopUp);
-});
+    const newName = nameInput.value;
+    const newDescr = descriptionInput.value;
+    editProfile(newName, newDescr)
+      .then(() => {
+        userTitle.textContent = newName;
+        userDescription.textContent = newDescr;
+        closePopUp(userProfilePopUp);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+
+
+
+avatarForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const newUrl = avatarLinkInput.value;
+  editAvatar(newUrl)
+  .then(() => {
+    userAvatar.src = newUrl;
+    closePopUp(avatarPopUp);
+  })
+  .catch(error => {
+    console.log(error)
+  })
+})
 
 addCardButton.addEventListener('click', () =>{
     openPopUp(addCardPopUp);
 });
 
+userAvatarEdit.addEventListener('click', () => {
+  openPopUp(avatarPopUp);
+  avatarLinkInput.value = userAvatar.src;
+})
+
 enableValidation(validationSettings);
+
+
+fetchInitialProfile()
+.then((res) => {
+  userTitle.textContent = res.name;
+  userDescription.textContent = res.about;
+  userAvatar.src = res.avatar;
+})
+
+function showLikes() {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
+  method: 'GET',
+headers: {
+  authorization: '09a759f4-5d35-4881-946d-43e4e52334b1'
+}
+})
+.then(res => res.json())
+.then((res) => {
+  console.log(res.likes);
+})
+.catch(error => {
+  console.log(error)
+});
+}
+
+showLikes();

@@ -8,7 +8,7 @@ import {
     placeLinkInput
   } from "./common";
 
-import {initialCards} from './inititalCards'
+import {fetchInitialCards} from './api'
 import { openPopUp } from "./modal";
 
 export function createCard(cardData) {
@@ -43,7 +43,61 @@ export function addNewCard() {
   return card;
 };
 
-initialCards.forEach((cardData) => {
-  const cardElement = createCard(cardData);
-  cardsGrid.append(cardElement);
-});
+  fetchInitialCards()
+  .then((res) => {
+    res.forEach((cardData) => {
+      const cardElement = createCard(cardData);
+      cardsGrid.append(cardElement);
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//старый код на случай проблем
+// initialCards.forEach((cardData) => {
+//   const cardElement = createCard(cardData);
+//   cardsGrid.append(cardElement);
+// });
+
+// export async function fetchAndRenderCards() {
+//   try {
+//     const response = await fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
+//       method: 'GET',
+//       headers: {
+//         authorization: '09a759f4-5d35-4881-946d-43e4e52334b1'
+//       }
+//     });
+
+//     if (response.ok) {
+//       const cardData = await response.json();
+//       cardData.forEach((card) => {
+//         const cardElement = createCard(card);
+//         cardsGrid.append(cardElement);
+//       });
+//     } else {
+//       throw new Error('Failed to fetch cards');
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
