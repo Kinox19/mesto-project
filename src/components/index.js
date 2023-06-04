@@ -18,13 +18,16 @@ import {
   placeLinkInput,
   validationSettings,
   avatarForm,
-  avatarLinkInput
+  avatarLinkInput,
+  confirmationDelete
 } from './common'
 import  {enableValidation, toggleButtonState}  from "./validate";
 import { addNewCard } from './card';
 import { openPopUp, closePopUp } from './modal';
 
 import {fetchInitialProfile, editProfile, editAvatar} from './api'
+
+export let userId;
 
 
 newPlaceForm.addEventListener('submit', (e) => {
@@ -92,22 +95,5 @@ fetchInitialProfile()
   userTitle.textContent = res.name;
   userDescription.textContent = res.about;
   userAvatar.src = res.avatar;
+  userId = res._id
 })
-
-function showLikes() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
-  method: 'GET',
-headers: {
-  authorization: '09a759f4-5d35-4881-946d-43e4e52334b1'
-}
-})
-.then(res => res.json())
-.then((res) => {
-  console.log(res.likes);
-})
-.catch(error => {
-  console.log(error)
-});
-}
-
-showLikes();

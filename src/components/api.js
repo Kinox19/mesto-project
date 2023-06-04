@@ -59,3 +59,16 @@ export function editAvatar(newUrl) {
   });
 }
 
+export function pushNewCard(name, link) {
+  return fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
+    method: 'POST',
+    headers: {
+      authorization: '09a759f4-5d35-4881-946d-43e4e52334b1',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      link: link
+    })
+  });
+}

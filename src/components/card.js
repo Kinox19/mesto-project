@@ -5,23 +5,32 @@ import {
     imagePopUp,
     cardsGrid,
     placeNameInput,
-    placeLinkInput
+    placeLinkInput,
+    userAvatar,
+    confirmationDelete
   } from "./common";
 
-import {fetchInitialCards} from './api'
+import { userId } from "./index";
+import {fetchInitialCards, pushNewCard} from './api'
 import { openPopUp } from "./modal";
 
 export function createCard(cardData) {
+    const { name, link, likes} = cardData;
+    const ownerId = cardData.owner._id;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const cardImage = cardElement.querySelector('.card__image');
-    cardElement.querySelector('.card__title').textContent = cardData.name;
-    cardImage.src = cardData.link;
-    cardImage.alt = cardData.name;
+    const cardLikesCounter = cardElement.querySelector('.card__like-counter')
+    const deleteButton = cardElement.querySelector('.button_type_delete');
+    cardElement.querySelector('.card__title').textContent = name;
+    cardImage.src = link;
+    cardImage.alt = name;
+    cardLikesCounter.textContent = likes.length
+
     //попап картинка
     cardImage.addEventListener('click', () => {
-      imageInPopUp.src = cardData.link;
-      imageInPopUp.alt = cardData.name;
-      imagePopUpCaption.textContent = cardData.name;
+      imageInPopUp.src = link;
+      imageInPopUp.alt = name;
+      imagePopUpCaption.textContent = name;
       openPopUp(imagePopUp);
     });
 
@@ -31,17 +40,28 @@ export function createCard(cardData) {
     });
 
     // удаляем карточку
-    cardElement.querySelector('.button_type_delete').addEventListener('click', function (e) {
-      e.target.closest('.card').remove();
+    if(ownerId === userId){
+      deleteButton.style.display = 'block'
+    }
+
+    deleteButton.addEventListener('click', function (e) {
+      openPopUp(confirmationDelete)
+      // e.target.closest('.card').remove();
     });
     return cardElement;
 };
 
 export function addNewCard() {
-  const cardObj = {name: placeNameInput.value, link:placeLinkInput.value};
-  const card = createCard(cardObj);
-  return card;
-};
+  const name = placeNameInput.value;
+  const link = placeLinkInput.value;
+  pushNewCard(name, link)
+  .then((res) => {
+    createCard(res)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
 
   fetchInitialCards()
   .then((res) => {
@@ -50,54 +70,3 @@ export function addNewCard() {
       cardsGrid.append(cardElement);
     });
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//старый код на случай проблем
-// initialCards.forEach((cardData) => {
-//   const cardElement = createCard(cardData);
-//   cardsGrid.append(cardElement);
-// });
-
-// export async function fetchAndRenderCards() {
-//   try {
-//     const response = await fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
-//       method: 'GET',
-//       headers: {
-//         authorization: '09a759f4-5d35-4881-946d-43e4e52334b1'
-//       }
-//     });
-
-//     if (response.ok) {
-//       const cardData = await response.json();
-//       cardData.forEach((card) => {
-//         const cardElement = createCard(card);
-//         cardsGrid.append(cardElement);
-//       });
-//     } else {
-//       throw new Error('Failed to fetch cards');
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-

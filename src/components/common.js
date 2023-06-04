@@ -14,6 +14,7 @@ export const addCardPopUp = document.querySelector('#popup-place');
 export const imagePopUp = document.querySelector('#popup-image');
 export const avatarPopUp = document.querySelector('#popup-avatar');
 export const avatarForm = document.querySelector('#newAvatar');
+export const confirmationDelete = document.querySelector('#popup-confirm')
 
 export const nameInput = document.querySelector('#user-name');
 export const userTitle = document.querySelector('.profile__title')
@@ -28,7 +29,7 @@ export const avatarLinkInput = document.querySelector('#avatar-link')
 export const imagePopUpCaption = document.querySelector('.popup__caption');
 export const imageInPopUp = document.querySelector('.popup__image');
 
-export const cardLikesCounter = document.querySelector('.card__like-counter')
+
 
 export const validationSettings = {
     formSelector: '.popup__container',
