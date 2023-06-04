@@ -19,7 +19,7 @@ import {
   validationSettings,
   avatarForm,
   avatarLinkInput,
-  confirmationDelete
+
 } from './common'
 import  {enableValidation, toggleButtonState}  from "./validate";
 import { addNewCard } from './card';
@@ -97,3 +97,4 @@ fetchInitialProfile()
   userAvatar.src = res.avatar;
   userId = res._id
 })
+
