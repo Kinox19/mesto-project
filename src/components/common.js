@@ -16,6 +16,10 @@ export const avatarPopUp = document.querySelector('#popup-avatar');
 export const avatarForm = document.querySelector('#newAvatar');
 export const confirmationDelete = document.querySelector('#popup-confirm')
 
+export const popupProfileButton = document.querySelector('#submit-profile');
+export const popupAvatarButton = document.querySelector('#submit-avatar');
+export const popupPlaceButton = document.querySelector('#submit-place');
+
 export const nameInput = document.querySelector('#user-name');
 export const userTitle = document.querySelector('.profile__title')
 export const descriptionInput = document.querySelector('#user-description');

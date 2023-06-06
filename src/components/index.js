@@ -19,13 +19,16 @@ import {
   validationSettings,
   avatarForm,
   avatarLinkInput,
-
+  confirmationDelete,
+  popupProfileButton,
+  popupAvatarButton,
 } from './common'
 import  {enableValidation, toggleButtonState}  from "./validate";
 import { addNewCard } from './card';
 import { openPopUp, closePopUp } from './modal';
+import { loadingButton } from './utils';
 
-import {fetchInitialProfile, editProfile, editAvatar} from './api'
+import {fetchInitialProfile, editProfile, editAvatar, deleteCard} from './api'
 
 export let userId;
 
@@ -50,6 +53,7 @@ newPlaceForm.addEventListener('submit', (e) => {
 
   userProfileForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    loadingButton(popupProfileButton, true)
     const newName = nameInput.value;
     const newDescr = descriptionInput.value;
     editProfile(newName, newDescr)
@@ -60,13 +64,13 @@ newPlaceForm.addEventListener('submit', (e) => {
       })
       .catch(error => {
         console.error(error);
-      });
+      })
+      .finally(() => loadingButton(popupProfileButton, false))
   });
-
-
 
 avatarForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  loadingButton(popupAvatarButton, true)
   const newUrl = avatarLinkInput.value;
   editAvatar(newUrl)
   .then(() => {
@@ -76,7 +80,8 @@ avatarForm.addEventListener('submit', (e) => {
   .catch(error => {
     console.log(error)
   })
-})
+  .finally(() => loadingButton(popupAvatarButton, false))
+});
 
 addCardButton.addEventListener('click', () =>{
     openPopUp(addCardPopUp);
@@ -98,3 +103,21 @@ fetchInitialProfile()
   userId = res._id
 })
 
+function deletitingCard(cardId, cardElement){
+  deleteCard(cardId)
+  .then(() => {
+    cardElement.remove();
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
+export function deletingHandler(cardId, cardElement){
+  openPopUp(confirmationDelete)
+  confirmationDelete.addEventListener('submit', (e) => {
+    e.preventDefault();
+    deletitingCard(cardId, cardElement)
+    closePopUp(confirmationDelete);
+  })
+}

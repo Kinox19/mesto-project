@@ -6,16 +6,17 @@ import {
     cardsGrid,
     placeNameInput,
     placeLinkInput,
-    userAvatar,
-    confirmationDelete
+    popupPlaceButton
   } from "./common";
 
 import { userId } from "./index";
-import {fetchInitialCards, pushNewCard} from './api'
+import {fetchInitialCards, pushNewCard, putLike, removeLike} from './api'
 import { openPopUp } from "./modal";
+import { deletingHandler } from "./index";
+import { loadingButton } from "./utils";
 
 export function createCard(cardData) {
-    const { name, link, likes} = cardData;
+    const { name, link, likes, _id} = cardData;
     const ownerId = cardData.owner._id;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const cardImage = cardElement.querySelector('.card__image');
@@ -26,6 +27,7 @@ export function createCard(cardData) {
     cardImage.alt = name;
     cardLikesCounter.textContent = likes.length
 
+
     //попап картинка
     cardImage.addEventListener('click', () => {
       imageInPopUp.src = link;
@@ -35,8 +37,25 @@ export function createCard(cardData) {
     });
 
     // лайкаем карточку
+    if(likes.some((like) => like._id === userId)){
+      cardElement.querySelector('.button_type_like').classList.add('button_type_like_active')
+    }
+
     cardElement.querySelector('.button_type_like').addEventListener('click', function (e) {
-      e.target.classList.toggle('button_type_like_active');
+      const isLikeActive = e.target.classList.contains('button_type_like_active')
+      if (isLikeActive){
+        removeLike(_id)
+        .then((res) => {
+          e.target.classList.remove('button_type_like_active');
+          cardLikesCounter.textContent = res.likes.length;
+        })
+      } else {
+        putLike(_id)
+        .then((res) => {
+          e.target.classList.add('button_type_like_active');
+          cardLikesCounter.textContent = res.likes.length;
+        })
+      }
     });
 
     // удаляем карточку
@@ -44,14 +63,14 @@ export function createCard(cardData) {
       deleteButton.style.display = 'block'
     }
 
-    deleteButton.addEventListener('click', function (e) {
-      openPopUp(confirmationDelete)
-      // e.target.closest('.card').remove();
+    deleteButton.addEventListener('click', function () {
+      deletingHandler(_id, cardElement)
     });
     return cardElement;
 };
 
 export function addNewCard() {
+  loadingButton(popupPlaceButton, true)
   const name = placeNameInput.value;
   const link = placeLinkInput.value;
   pushNewCard(name, link)
@@ -61,6 +80,7 @@ export function addNewCard() {
   .catch(error => {
     console.log(error)
   })
+  .finally(() => loadingButton(popupPlaceButton, false))
 }
 
   fetchInitialCards()
@@ -68,5 +88,5 @@ export function addNewCard() {
     res.forEach((cardData) => {
       const cardElement = createCard(cardData);
       cardsGrid.append(cardElement);
-    });
+    })
   });
