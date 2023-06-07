@@ -1,5 +1,3 @@
-import { createCard } from "./card";
-
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
   headers: {
@@ -7,16 +5,6 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
-
-const checkResponse = (res) => {
-  if (res.ok){
-    res.json();
-  } else {
-    Promise.reject(`Ошибка, ${res.status}`)
-  }
-}
-
-
 
 //переименовать
 export function fetchInitialCards() {
