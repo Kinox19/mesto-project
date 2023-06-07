@@ -15,6 +15,8 @@ import { openPopUp } from "./modal";
 import { deletingHandler } from "./index";
 import { loadingButton } from "./utils";
 
+
+
 export function createCard(cardData) {
     const { name, link, likes, _id} = cardData;
     const ownerId = cardData.owner._id;
@@ -26,7 +28,6 @@ export function createCard(cardData) {
     cardImage.src = link;
     cardImage.alt = name;
     cardLikesCounter.textContent = likes.length
-
 
     //попап картинка
     cardImage.addEventListener('click', () => {
@@ -75,10 +76,10 @@ export function addNewCard() {
   const link = placeLinkInput.value;
   pushNewCard(name, link)
   .then((res) => {
-    createCard(res)
+    return createCard(res)
   })
   .catch(error => {
-    console.log(error)
+    console.log(`При создании карточки произошла ошибка ${error}`)
   })
   .finally(() => loadingButton(popupPlaceButton, false))
 }

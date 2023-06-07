@@ -45,6 +45,7 @@ newPlaceForm.addEventListener('submit', (e) => {
     toggleButtonState(inputList, buttonElement, { inactiveButtonClass: 'popup__button_inactive' });
   });
 
+
   userProfileEdit.addEventListener('click', () =>{
     openPopUp(userProfilePopUp);
     nameInput.value = userTitle.textContent;
