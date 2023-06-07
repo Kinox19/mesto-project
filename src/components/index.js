@@ -14,8 +14,6 @@ import {
   descriptionInput,
   userDescription,
   userAvatar,
-  placeNameInput,
-  placeLinkInput,
   validationSettings,
   avatarForm,
   avatarLinkInput,
@@ -23,26 +21,20 @@ import {
   popupProfileButton,
   popupAvatarButton,
 } from './common'
-import  {enableValidation, toggleButtonState}  from "./validate";
-import { addNewCard } from './card';
+import  {enableValidation}  from "./validate";
+import { addNewCard, createCard } from './card';
 import { openPopUp, closePopUp } from './modal';
 import { loadingButton } from './utils';
-
-import {fetchInitialProfile, editProfile, editAvatar, deleteCard} from './api'
+import {fetchInitialProfile, editProfile, editAvatar, deleteCard, fetchInitialCards} from './api'
 
 export let userId;
+let deleteCardId;
+let deleteCardElement;
 
 
 newPlaceForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const card = addNewCard();
-    cardsGrid.prepend(card);
-    closePopUp(addCardPopUp);
-    placeNameInput.value = '';
-    placeLinkInput.value = '';
-    const inputList = Array.from(newPlaceForm.querySelectorAll('.popup__input'));
-    const buttonElement = newPlaceForm.querySelector('.popup__button');
-    toggleButtonState(inputList, buttonElement, { inactiveButtonClass: 'popup__button_inactive' });
+    addNewCard();
   });
 
 
@@ -95,30 +87,42 @@ userAvatarEdit.addEventListener('click', () => {
 
 enableValidation(validationSettings);
 
+export function deletingHandler(cardId, cardElement) {
+  openPopUp(confirmationDelete);
+  deleteCardId = cardId;
+  deleteCardElement = cardElement;
+  confirmationDelete.addEventListener('submit', handleDeleteSubmit);
+}
 
-fetchInitialProfile()
-.then((res) => {
-  userTitle.textContent = res.name;
-  userDescription.textContent = res.about;
-  userAvatar.src = res.avatar;
-  userId = res._id
-})
+function handleDeleteSubmit(e) {
+  e.preventDefault();
+  deletitingCard(deleteCardId, deleteCardElement);
+  confirmationDelete.removeEventListener('submit', handleDeleteSubmit);
+}
 
-function deletitingCard(cardId, cardElement){
+function deletitingCard(cardId, cardElement) {
   deleteCard(cardId)
-  .then(() => {
-    cardElement.remove();
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+    .then(() => {
+      cardElement.remove();
+      closePopUp(confirmationDelete);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-export function deletingHandler(cardId, cardElement){
-  openPopUp(confirmationDelete)
-  confirmationDelete.addEventListener('submit', (e) => {
-    e.preventDefault();
-    deletitingCard(cardId, cardElement)
-    closePopUp(confirmationDelete);
+Promise.all([fetchInitialProfile(), fetchInitialCards()])
+.then(([user, initialCards]) => {
+  userTitle.textContent = user.name;
+  userDescription.textContent = user.about;
+  userAvatar.src = user.avatar;
+  userId = user._id
+
+  initialCards.forEach(card => {
+    const cardElement = createCard(card);
+    cardsGrid.append(cardElement);
   })
-}
+})
+.catch((error) => {
+  console.log(error)
+})

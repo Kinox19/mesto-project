@@ -33,10 +33,3 @@ const handleEscapeClose = (e) => {
       closePopUp(openedPopUp)
   }
 }
-
-closePopUpButtons.forEach(button => {
-  const closestPopUp = button.closest('.popup');
-  button.addEventListener('click', () => {
-      closePopUp(closestPopUp);
-  });
-});

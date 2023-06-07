@@ -10,10 +10,12 @@ import {
   } from "./common";
 
 import { userId } from "./index";
-import {fetchInitialCards, pushNewCard, putLike, removeLike} from './api'
-import { openPopUp } from "./modal";
+import {pushNewCard, putLike, removeLike} from './api'
+import { openPopUp, closePopUp } from "./modal";
 import { deletingHandler } from "./index";
 import { loadingButton } from "./utils";
+import { toggleButtonState } from "./validate";
+import { addCardPopUp, newPlaceForm } from "./common";
 
 
 
@@ -50,11 +52,17 @@ export function createCard(cardData) {
           e.target.classList.remove('button_type_like_active');
           cardLikesCounter.textContent = res.likes.length;
         })
+        .catch((error) => {
+          console.log(error)
+        })
       } else {
         putLike(_id)
         .then((res) => {
           e.target.classList.add('button_type_like_active');
           cardLikesCounter.textContent = res.likes.length;
+        })
+        .catch((error) => {
+          console.log(error)
         })
       }
     });
@@ -65,29 +73,28 @@ export function createCard(cardData) {
     }
 
     deleteButton.addEventListener('click', function () {
-      deletingHandler(_id, cardElement)
+      deletingHandler(_id, cardElement);
     });
+
     return cardElement;
 };
 
 export function addNewCard() {
-  loadingButton(popupPlaceButton, true)
+  loadingButton(popupPlaceButton, true);
   const name = placeNameInput.value;
   const link = placeLinkInput.value;
   pushNewCard(name, link)
-  .then((res) => {
-    return createCard(res)
-  })
-  .catch(error => {
-    console.log(`При создании карточки произошла ошибка ${error}`)
-  })
-  .finally(() => loadingButton(popupPlaceButton, false))
-}
-
-  fetchInitialCards()
-  .then((res) => {
-    res.forEach((cardData) => {
-      const cardElement = createCard(cardData);
-      cardsGrid.append(cardElement);
+    .then((res) => {
+      const cardElement = createCard(res);
+      cardsGrid.prepend(cardElement);
+      closePopUp(addCardPopUp);
+      newPlaceForm.reset();
+      const inputList = Array.from(newPlaceForm.querySelectorAll('.popup__input'));
+      const buttonElement = newPlaceForm.querySelector('.popup__button');
+      toggleButtonState(inputList, buttonElement, { inactiveButtonClass: 'popup__button_inactive' });
     })
-  });
+    .catch(error => {
+      console.log(`Карточку создать не вышло: ${error}`);
+    })
+    .finally(() => loadingButton(popupPlaceButton, false));
+}
