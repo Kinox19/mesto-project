@@ -17,9 +17,7 @@ import {
   validationSettings,
   avatarForm,
   avatarLinkInput,
-  confirmationDelete,
-  popupProfileButton,
-  popupAvatarButton,
+  confirmationDelete
 } from './common'
 import  {enableValidation}  from "./validate";
 import { addNewCard, createCard } from './card';
@@ -46,7 +44,7 @@ newPlaceForm.addEventListener('submit', (e) => {
 
   userProfileForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    loadingButton(popupProfileButton, true)
+    loadingButton(e.submitter, true)
     const newName = nameInput.value;
     const newDescr = descriptionInput.value;
     editProfile(newName, newDescr)
@@ -58,12 +56,12 @@ newPlaceForm.addEventListener('submit', (e) => {
       .catch(error => {
         console.error(error);
       })
-      .finally(() => loadingButton(popupProfileButton, false))
+      .finally(() => loadingButton(e.submitter, false))
   });
 
 avatarForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  loadingButton(popupAvatarButton, true)
+  loadingButton(e.submitter, true)
   const newUrl = avatarLinkInput.value;
   editAvatar(newUrl)
   .then(() => {
@@ -73,7 +71,7 @@ avatarForm.addEventListener('submit', (e) => {
   .catch(error => {
     console.log(error)
   })
-  .finally(() => loadingButton(popupAvatarButton, false))
+  .finally(() => loadingButton(e.submitter, false))
 });
 
 addCardButton.addEventListener('click', () =>{
